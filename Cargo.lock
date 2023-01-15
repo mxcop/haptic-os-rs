@@ -19,15 +19,6 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
 name = "bare-metal"
-version = "0.2.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5deb64efa5bd81e31fcd1938615a6d98c82eafcbcd787162b6f63b91d6bac5b3"
-dependencies = [
- "rustc_version",
-]
-
-[[package]]
-name = "bare-metal"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f8fe8f5a8a398345e52358e18ff07cc17a568fbca5c6f73873d3a62056309603"
@@ -41,7 +32,6 @@ checksum = "dcb6dd1c2376d2e096796e234a70e17e94cc2d5d54ff8ce42b28cef1d0d359a4"
 [[package]]
 name = "bl602-hal"
 version = "0.1.0"
-source = "git+https://github.com/sipeed/bl602-hal?rev=dfc9946e79ea4dac18be11efce11d0592a8517fb#dfc9946e79ea4dac18be11efce11d0592a8517fb"
 dependencies = [
  "bl602-pac",
  "embedded-hal 0.2.7",
@@ -49,7 +39,7 @@ dependencies = [
  "embedded-time",
  "nb 1.0.0",
  "paste",
- "riscv 0.6.0",
+ "riscv 0.7.0",
  "riscv-target",
 ]
 
@@ -58,7 +48,7 @@ name = "bl602-pac"
 version = "0.1.0"
 source = "git+https://github.com/sipeed/bl602-pac?branch=main#669e1e77fc3c978ecadb21e25f141ca2447fd5ee"
 dependencies = [
- "bare-metal 1.0.0",
+ "bare-metal",
  "riscv 0.7.0",
  "vcell",
 ]
@@ -255,22 +245,11 @@ checksum = "456c603be3e8d448b072f410900c09faf164fbce2d480456f50eea6e25f9c848"
 
 [[package]]
 name = "riscv"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2f0b705d428e9d0f78e2bb73093887ee58a83c9688de3faedbb4c0631c4618e"
-dependencies = [
- "bare-metal 0.2.5",
- "bit_field",
- "riscv-target",
-]
-
-[[package]]
-name = "riscv"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6907ccdd7a31012b70faf2af85cd9e5ba97657cc3987c4f13f8e4d2c2a088aba"
 dependencies = [
- "bare-metal 1.0.0",
+ "bare-metal",
  "bit_field",
  "riscv-target",
 ]
@@ -281,7 +260,7 @@ version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73fc4bc7113424814738fe79755a5764e392b3d4d1bc757e6aa6f61cede32095"
 dependencies = [
- "bare-metal 1.0.0",
+ "bare-metal",
  "bit_field",
  "embedded-hal 0.2.7",
 ]
@@ -329,30 +308,6 @@ dependencies = [
  "lazy_static",
  "regex",
 ]
-
-[[package]]
-name = "rustc_version"
-version = "0.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "138e3e0acb6c9fb258b19b67cb8abd63c00679d2851805ea151465464fe9030a"
-dependencies = [
- "semver",
-]
-
-[[package]]
-name = "semver"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d7eb9ef2c18661902cc47e535f9bc51b78acd254da71d375c2f6720d9a40403"
-dependencies = [
- "semver-parser",
-]
-
-[[package]]
-name = "semver-parser"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "388a1df253eca08550bef6c72392cfe7c30914bf41df5269b68cbd6ff8f570a3"
 
 [[package]]
 name = "syn"

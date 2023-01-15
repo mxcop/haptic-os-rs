@@ -9,7 +9,8 @@ edition = "2021"
 [dependencies]
 riscv-rt = "0.10.0"
 embedded-hal = "=1.0.0-alpha.5"
-bl602-hal = { git = "https://github.com/sipeed/bl602-hal", rev="dfc9946e79ea4dac18be11efce11d0592a8517fb" }
+bl602-hal = { path = "../bl602-hal" }
+# bl602-hal = { git = "https://github.com/sipeed/bl602-hal", rev="dfc9946e79ea4dac18be11efce11d0592a8517fb" }
 panic-halt = "0.2.0"
 riscv = "0.10.0"
 embedded-time = "0.12.1"

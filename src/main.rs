@@ -2,14 +2,15 @@
 #![no_main]
 
 use bl602_hal as hal;
+use embedded_time::duration::Milliseconds;
 use core::fmt::Write;
-use embedded_hal::delay::blocking::DelayMs;
+use embedded_hal::{delay::blocking::DelayMs, pwm::blocking::Pwm};
 use embedded_hal::digital::blocking::OutputPin;
 use hal::{
   clock::{Strict, SysclkFreq, UART_PLL_FREQ},
   pac,
   prelude::*,
-  serial::*,
+  serial::*, pwm,
 };
 use panic_halt as _;
 
@@ -40,22 +41,31 @@ fn main() -> ! {
     clocks,
   );
   // Also set up a pin as GPIO, to blink an LED
-  let mut gpio11 = parts.pin11.into_pull_down_output();
-  let mut gpio14= parts.pin14.into_pull_down_output();
+  //let mut gpio11 = parts.pin11.into_pull_down_output();
+  /* let mut gpio14= */ 
+
+  let mut channels = pwm::Channels::from((dp.PWM, clocks));
+  channels.channel4.enable(&()).unwrap();
+  channels.channel4.set_period(Milliseconds::new(400u32)).unwrap();
+  let duty = channels.channel4.get_max_duty().unwrap() / 2;
+  channels.channel4.set_duty(&(), duty).unwrap();
+  parts.pin14.into_pull_down_pwm();
 
   // Create a blocking delay function based on the current cpu frequency
   let mut d = bl602_hal::delay::McycleDelay::new(clocks.sysclk().0);
 
   loop {
     // Toggle the LED on and off once a second. Report LED status over UART
-    gpio11.set_high().unwrap();
-    gpio14.set_low().unwrap();
+    //gpio11.set_high().unwrap();
+    //gpio14.set_low().unwrap();
+    //channels.channel4.enable(&()).unwrap();
     serial.write_str("LEDs on\r\n").ok();
-    d.delay_ms(500).unwrap();
+    d.delay_ms(1000).unwrap();
 
-    gpio11.set_low().unwrap();
-    gpio14.set_high().unwrap();
+    //gpio11.set_low().unwrap();
+    //gpio14.set_high().unwrap();
+    //channels.channel4.disable(&()).unwrap();
     serial.write_str("LEDs off\r\n").ok();
-    d.delay_ms(500).unwrap();
+    d.delay_ms(1000).unwrap();
   }
 }
